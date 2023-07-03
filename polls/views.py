@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
+from django.http import JsonResponse
 from .models import Question, Choice
-
+import requests
+from .sheet import main
 
 # Create your views here.
 
@@ -65,3 +67,49 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
     # return HttpResponse("You're voting on question %s." % question_id)
+
+
+def get_cities_weather(request):
+    # Retrieve user input from the request
+    weather_condition = request.GET.get('weather_condition')
+    out_city = []
+
+    # Filter cities in the database that match the weather condition
+    cities = main()
+
+    if cities == [] or cities is None:
+        # No cities found for the given weather condition
+        return JsonResponse({'message': 'No cities found for the specified weather condition.'})
+
+    # Retrieve additional weather information for each city from the OpenWeatherMap API
+    for city in cities:
+        url = f'https://api.openweathermap.org/data/2.5/weather?q={city[0]},{city[1]},US&units=imperial&appid=d09a5b8a5a1764e7ae30c5ff46c2a6f8'
+        response = requests.get(url)
+        data = response.json()
+
+        # Extract temperature and wind speed from the API response
+        try:
+            if weather_condition.title() not in [x['main'] for x in data['weather']]:
+                continue
+            d = {
+                'City': city[0],
+                'state': city[1],
+                'temperature': data['main']['temp'],
+                'wind_speed': data['wind']['speed'],
+                'weather': data['weather']
+            }
+        except KeyError as err:
+            continue
+        out_city.append(d)
+
+    # Prepare the response data with city information
+    # response_data = []
+    # for city in cities:
+    #     response_data.append({
+    #         'city': city.cities,
+    #         'state': city.state,
+    #         'temperature': city.temperature,
+    #         'wind_speed': city.wind_speed,
+    #     })
+
+    return JsonResponse({'cities': out_city})

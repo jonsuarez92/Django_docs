@@ -1,18 +1,36 @@
-import React, { useState } from 'react'
+import { useState } from "react";
+import React from 'react'
 
-const weatherForm = () => {
-    // weather_api_key = d09a5b8a5a1764e7ae30c5ff46c2a6f8
+const WeatherForm = (props) => {
+
+
+    const [formData, setFormData] = useState({
+        searchTerm: ""
+    })
+
+    const handleChange = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value })
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        props.citiesSearch(formData.searchTerm)
+    }
 
     return (
         <div>
-            <form >
+            <form onSubmit={handleSubmit}>
                 <input
-                    type="text" />
-                <button type="submit">Submit</button>
+                    type="text"
+                    name="searchTerm"
+                    onChange={handleChange}
+                    value={formData.searchTerm}
+                />
+                <input type="submit" value="Search" />
             </form>
         </div>
-    );
-};
+    )
+}
 
-
-export default weatherForm
+export default WeatherForm
