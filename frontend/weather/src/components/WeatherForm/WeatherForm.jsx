@@ -32,5 +32,4 @@ const WeatherForm = (props) => {
         </div>
     )
 }
-
 export default WeatherForm
