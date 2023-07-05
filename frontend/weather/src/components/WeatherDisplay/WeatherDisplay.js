@@ -1,4 +1,4 @@
-import { Spinner } from "react-bootstrap"
+import { Spinner, Card } from "react-bootstrap"
 export default function WeatherDisplay({ weatherApi, loader }) {
     const loaded = () => {
         if (weatherApi.cities.length === 0) {
@@ -6,34 +6,45 @@ export default function WeatherDisplay({ weatherApi, loader }) {
         }
         else {
             return (
-                <div >
+                <div className="weatherwrap">
                     {console.log(weatherApi.cities)}
                     {weatherApi.cities.map((city, index) => {
                         return (
-                            <div key={index}>
-                                <h1>{city.City}</h1>
-                                <p>State: {city.state}</p>
-                                <p>Temperature: {city.temperature}</p>
-                                <p>Wind Speed: {city.wind_speed}</p>
+
+                            <div className="card" style={{ width: "18rem" }} key={index}>
+                                <div className="card-body">
+                                    <h1 className="card-title">{city.City}</h1>
+                                    <p className="card-text">State: {city.state}</p>
+                                    <p className="card-text">Temperature: {city.temperature}°F </p>
+                                    <p className="card-text">Wind Speed: {city.wind_speed} mph</p>
+                                </div>
                             </div>
+
+
                         );
-                    })}
-                </div>
+                    })
+                    }
+                </div >
             );
         }
     };
 
     const loading = () => {
-
         if (!loader) {
-            <div className="spinnerBox">
-                <Spinner variant="primary" animation="border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </Spinner>
-            </div>
+            <h3> Select Following Inputs To Find Weather Condition For Different Cities : Thunderstorm, Drizzle, Rain, Snow, Atmosphere, Clear, Clouds</h3>;
         }
+        else {
+            return (
+                <div className="spinnerBox">
+                    <Spinner variant="primary" animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                </div>
+            )
+        }
+        // return <h3> Select Following Inputs To Find Weather Condition For Different Cities : Thunderstorm, Drizzle, Rain, Snow, Atmosphere, Clear, Clouds
+        // </h3>;
     };
-
 
     return weatherApi && !loader ? loaded() : loading();
 }
