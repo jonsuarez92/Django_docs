@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import React from 'react'
 import axios from 'axios';
-
 import WeatherForm from '../../components/WeatherForm/WeatherForm'
 import WeatherDisplay from '../../components/WeatherDisplay/WeatherDisplay'
 
