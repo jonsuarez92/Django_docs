@@ -7,6 +7,7 @@ body {
 
 .App {
   text-align: center;
+  /* background-image: url('https://i.imgur.com/GvB85NN.jpeg'); */
   background: rgb(15, 16, 16);
   background: linear-gradient(90deg, rgba(15, 16, 16, 0.9654455532212886) 40%, rgba(154, 173, 177, 1) 100%);
   background-size: cover;
@@ -16,7 +17,7 @@ body {
 
 }
 
-.card {
+/* .card {
 
   background-color: #334435;
   border-radius: 8px;
@@ -30,9 +31,9 @@ body {
 
 .card:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 2);
-}
+} */
 
-.card-title {
+/* .card-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
@@ -41,11 +42,75 @@ body {
 .card-text {
   font-size: 16px;
   margin-bottom: 5px;
+} */
+
+.outterWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 90vw;
+  /* border: solid 1px green; */
+  justify-content: space-around;
+  align-items: center;
 }
 
-.weatherwrap {
+.weathercard {
   display: flex;
   flex-wrap: wrap;
-  padding: 20px;
-  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+  background-color: rgba(77, 86, 77, 0.4);
+
+
+  /* padding: 20px; */
+  justify-content: left;
+  width: 300px;
+  border: solid .5px rgb(252, 251, 251);
+
+}
+
+.weatherContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.windWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.todayWeather {
+  /* border: solid 2px rgb(76, 0, 255); */
+  display: flex;
+  font-size: 15px;
+  font-weight: bolder;
+}
+
+.location {
+
+  display: flex;
+  font-size: 13px;
+}
+
+.emoji {
+  background-color: blue;
+  border-radius: 50px;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  font-size: 50px;
+}
+
+.temp {
+  font-size: 50px;
+}
+
+.windContent {
+  font-size: 12px;
+}
+
+.weatherStatus {
+  font-size: 12px;
 }

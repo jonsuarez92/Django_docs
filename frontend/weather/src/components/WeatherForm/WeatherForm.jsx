@@ -1,39 +1,4 @@
-// import { useState } from "react";
-// import React from 'react'
-
-// const WeatherForm = (props) => {
-
-
-//     const [formData, setFormData] = useState({
-//         searchTerm: ""
-//     })
-
-//     const handleChange = (event) => {
-//         setFormData({ ...formData, [event.target.name]: event.target.value })
-//     }
-
-//     const handleSubmit = (event) => {
-//         event.preventDefault();
-
-//         props.citiesSearch(formData.searchTerm)
-//     }
-
-//     return (
-//         <div>
-//             <form onSubmit={handleSubmit}>
-//                 <input
-//                     type="text"
-//                     name="searchTerm"
-//                     onChange={handleChange}
-//                     value={formData.searchTerm} />
-//                 <input type="submit" value="Search" />
-//             </form>
-//         </div>
-//     )
-// }
-// export default WeatherForm
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const WeatherForm = (props) => {
 
@@ -41,16 +6,46 @@ const WeatherForm = (props) => {
 
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
+        props.setEmojiPicker(event.target.value)
+
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         props.citiesSearch(searchTerm);
-
+        pickEmoji(props.emojiPicker)
 
 
     };
 
+    const pickEmoji = (str) => {
+        switch (str) {
+
+            case 'Rain':
+                props.setPick('🌧️');
+                break;
+            case "Clear":
+                props.setPick('☀️');
+                break;
+            case "Snow":
+                props.setPick('❄');
+                break;
+            case "Drizzle":
+                props.setPick('⛆');
+                break;
+            case "Thunderstorm":
+                props.setPick('⛈️');
+                break;
+            case "Atmosphere":
+                props.setPick('💨');
+                break;
+            case "Clouds":
+                props.setPick('☁️');
+                break;
+
+
+        }
+    }
     return (
         <div >
             <form onSubmit={handleSubmit}>
@@ -59,7 +54,6 @@ const WeatherForm = (props) => {
                     onChange={handleChange}
                     value={searchTerm}
                 >
-                    <option value="">Select a weather condition</option>
                     <option value="Thunderstorm">Thunderstorm</option>
                     <option value="Drizzle">Drizzle</option>
                     <option value="Rain">Rain</option>

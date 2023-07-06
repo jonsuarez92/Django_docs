@@ -94,22 +94,12 @@ def get_cities_weather(request):
             d = {
                 'City': city[0],
                 'state': city[1],
-                'temperature': data['main']['temp'],
+                'temperature': int(data['main']['temp']),
                 'wind_speed': data['wind']['speed'],
                 'weather': data['weather']
             }
         except KeyError as err:
             continue
         out_city.append(d)
-
-    # Prepare the response data with city information
-    # response_data = []
-    # for city in cities:
-    #     response_data.append({
-    #         'city': city.cities,
-    #         'state': city.state,
-    #         'temperature': city.temperature,
-    #         'wind_speed': city.wind_speed,
-    #     })
 
     return JsonResponse({'cities': out_city})
