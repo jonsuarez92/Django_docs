@@ -6,16 +6,16 @@ const WeatherForm = (props) => {
 
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
-        props.setEmojiPicker(event.target.value)
-
+        props.setEmojiPicker(event.target.value);
+        props.setloader(true);
+        props.citiesSearch(searchTerm);
+        pickEmoji(event.target.value);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         props.citiesSearch(searchTerm);
         pickEmoji(props.emojiPicker)
-
-
     };
 
     const pickEmoji = (str) => {

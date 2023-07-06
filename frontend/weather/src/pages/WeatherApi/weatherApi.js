@@ -37,7 +37,8 @@ const WeatherApi = () => {
     return (
         <div>
             <h1>Weather Status</h1>
-            <WeatherForm citiesSearch={getWeather} setEmojiPicker={setEmojiPicker} setPick={setPick} emojiPicker={emojiPicker} />
+
+            <WeatherForm citiesSearch={getWeather} setEmojiPicker={setEmojiPicker} setPick={setPick} emojiPicker={emojiPicker} setloader={setloader} />
             <WeatherDisplay weatherApi={weatherApi} loader={loader} emojiPicker={emojiPicker} pick={pick} searchClicked={searchClicked} />
         </div>
     )

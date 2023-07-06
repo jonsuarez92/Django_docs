@@ -5,7 +5,7 @@ from django.template import loader
 from django.http import JsonResponse
 from .models import Question, Choice
 import requests
-from .sheet import main
+from .sheet import main as googlesheet
 
 # Create your views here.
 
@@ -71,14 +71,14 @@ def vote(request, question_id):
 
 def get_cities_weather(request):
     # Retrieve user input from the request
-    weather_condition = request.GET.get('weather_condition')
+    weather_condition = request.GET.get('weather_condition', 'Clear')
     out_city = []
 
-    # Filter cities in the database that match the weather condition
-    cities = main()
+    # importing all the cities from googlesheet
+    cities = googlesheet()
 
     if cities == [] or cities is None:
-        # No cities found for the given weather condition
+        # No cities found becasue the connection to google sheet is not correction
         return JsonResponse({'message': 'No cities found for the specified weather condition.'})
 
     # Retrieve additional weather information for each city from the OpenWeatherMap API
