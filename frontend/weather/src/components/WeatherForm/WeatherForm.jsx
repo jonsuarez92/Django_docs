@@ -9,9 +9,7 @@ const WeatherForm = (props) => {
         props.setEmojiPicker(event.target.value);
         console.log(event.target.value);
         console.log(props)
-        props.setloader(true);
-        props.citiesSearch(searchTerm);
-        pickEmoji(event.target.value);
+
 
     };
 
