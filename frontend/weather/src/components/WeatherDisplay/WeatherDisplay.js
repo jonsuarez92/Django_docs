@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Spinner, Card } from "react-bootstrap"
+// import { useState } from "react";
+import { Spinner } from "react-bootstrap"
 export default function WeatherDisplay({ weatherApi, loader, emojiPicker, pick, searchClicked }) {
 
 

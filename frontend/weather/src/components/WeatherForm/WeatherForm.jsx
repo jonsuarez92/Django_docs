@@ -7,8 +7,8 @@ const WeatherForm = (props) => {
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
         props.setEmojiPicker(event.target.value);
-        console.log(event.target.value);
-        console.log(props)
+        // console.log(event.target.value);
+        // console.log(props)
 
 
     };
